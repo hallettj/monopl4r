@@ -1,0 +1,11 @@
+<h1>Transfer Funds</h1>
+<%= error_messages_for :journal %>
+<% form_for @posting do |f| -%>
+  <%= f.label :account, "To Account:" %>
+  <%= f.select :account_id, Account.all.map { |a| [a.user.login, a.id] } %>
+  <%= f.label :amount, "Amount to Transfer:" %>
+  <%= f.select :asset_type_id, AssetType.all.map { |t| [t.identifier, t.id] } %>
+  <%= f.text_field :amount %>
+  <%= f.submit "Authorize Transfer" %>
+  <%= link_to "Cancel", :action => 'index' %>
+<% end -%>

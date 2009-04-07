@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
 
+  has_one :account
+  has_many :postings
+  has_many :journals, :through => :postings
+
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
   validates_uniqueness_of   :login
@@ -46,6 +50,12 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+
+  # Create an account for the user if one does not already exist.
+  def account_with_automatic_creation
+    account_without_automatic_creation || create_account
+  end
+  alias_method_chain :account, :automatic_creation
 
   protected
     
