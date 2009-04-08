@@ -2,14 +2,16 @@
   <tr>
     <th colspan="2">Transaction</th>
     <th>Account</th>
-    <th>Amount</th>
+    <th>Debit</th>
+    <th>Credit</th>
   </tr>
   <% @postings.each do |posting| -%>
     <tr>
       <td><%= posting.journal.id %></td>
       <td><%= posting.journal.label %></td>
       <td><%= posting.account.name %></td>
-      <td><%= posting.pretty_amount %></td>
+      <td><%= posting.pretty_debit %></td>
+      <td><%= posting.pretty_credit %></td>
     </tr>
   <% end -%>
 </table>

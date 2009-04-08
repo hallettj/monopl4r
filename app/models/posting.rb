@@ -9,4 +9,16 @@ class Posting < ActiveRecord::Base
   def pretty_amount
     "%s%0.2f" % [asset_type.identifier, amount]
   end
+
+  def pretty_debit
+    if amount < 0.0
+      "%s%0.2f" % [asset_type.identifier, -amount]
+    end
+  end
+
+  def pretty_credit
+    if amount > 0.0
+      "%s%0.2f" % [asset_type.identifier, amount]
+    end
+  end
 end
