@@ -1,5 +1,7 @@
 class PostingsController < ApplicationController
 
+  verify :method => :post, :only => :create
+
   def index
     @postings = Posting.find(:all, :include => [:journal, :asset_type])
   end
